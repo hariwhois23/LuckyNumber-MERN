@@ -1,0 +1,39 @@
+name : MERN Continous 
+
+on: 
+    push: 
+        branches: [Mod]
+
+jobs: 
+    mongo-init: 
+        runs-on: ubuntu-latest
+        
+        services:
+            mongo:
+                image: mongo
+                ports: ['27017:27017']
+        
+        steps:
+            - name: Checkout git repository
+              uses: actions/checkout@v5
+            
+            - name: Setup NodeJS
+              uses: actions/setup-node@v3
+              with:
+                node-version: '18'
+            
+            - name: Install netcat for MongoDB check
+              run: sudo apt-get update && sudo apt-get install -y netcat
+            
+            - name: waiting for the launch of mongo DB
+              run: |
+                until nc -z localhost 27017; do 
+                    echo "waiting for MongoDB..."
+                    sleep 2
+                done
+                    echo "MongoDB is up"
+
+            - name: backend setup 
+              working-directory: ./backend
+              run: npm install @@ node app.js
+                
