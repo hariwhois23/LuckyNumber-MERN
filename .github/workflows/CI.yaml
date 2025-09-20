@@ -1,0 +1,68 @@
+name : MERN Continous Integration
+
+on: 
+    push: 
+        branches: [main]
+
+jobs: 
+    backend-test : 
+        runs-on: ubuntu-latest
+        
+        services:
+            mongodb:
+                image: mongo
+                ports: ['27017:27017']
+        
+        steps:
+            - name: Checkout git repository
+              uses: actions/checkout@v5
+           
+              
+            - name: Setup NodeJS
+              uses: actions/setup-node@v3
+              with:
+                node-version: '24'
+           
+                
+            - name: Install netcat for MongoDB check
+              run: |
+               sudo apt-get update
+               sudo apt-get install -y netcat-openbsd
+        
+              
+            - name: waiting for the launch of mongo DB
+              run: |
+                until nc -z localhost 27017; do 
+                    echo "waiting for MongoDB..."
+                    sleep 2
+                done
+                    echo "MongoDB is up"
+
+
+            - name: dependecies installation
+              working-directory: ./backend
+              run: |
+                npm install 
+                npm install --save-dev jest supertest mongodb-memory-server nodemon
+
+            - name: Starting the backend
+              working-directory: ./backend
+              run: node app.js
+            
+            - name: running tests
+              working-directory: ./backend
+              run: |
+                  npm test
+
+            - name: Run test coverage
+              working-directory: ./backend
+              run: npm run test:coverage
+
+            - name: Upload coverage to Codecov
+              uses: codecov/codecov-action@v3
+              with:
+                file: ./backend/coverage/lcov.info
+                flags: unittests
+                name: codecov-umbrella
+
+        

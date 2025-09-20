@@ -1,0 +1,20 @@
+name : CD Pipeline
+
+on:
+    push:
+        branches: ["Mod"]
+
+jobs:
+    deployment:
+        runs-on: ubuntu-latest
+
+        steps: 
+            - name: Deploy the application via SSH
+              uses: appleboy/ssh-action@v1
+              with:
+                host: ${{ secrets.HOST }}
+                username: linuxserver.io
+                password: ${{ secrets.PASSWORD }}
+                key: ${{ secrets.pvtkey}}   
+                script: 
+                
