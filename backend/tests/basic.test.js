@@ -4,7 +4,6 @@ describe('Basic Tests', () => {
         expect(1 + 1).toBe(2);
     });
 
-    
     test('Should test string equality', () => {
         expect('hello').toBe('hello');
     });
