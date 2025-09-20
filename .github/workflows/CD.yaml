@@ -1,0 +1,13 @@
+name : CD Pipeline
+
+on:
+    push:
+        branches: ["main"]
+
+jobs:
+    deployment:
+        runs-on: ubuntu-latest
+
+        steps: 
+            - name: Deploy the application via SSH
+                
