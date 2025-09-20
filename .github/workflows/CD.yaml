@@ -2,7 +2,7 @@ name : CD Pipeline
 
 on:
     push:
-        branches: ["main"]
+        branches: ["Mod"]
 
 jobs:
     deployment:
@@ -10,4 +10,11 @@ jobs:
 
         steps: 
             - name: Deploy the application via SSH
+              uses: appleboy/ssh-action@v1
+              with:
+                host: ${{ secrets.HOST }}
+                username: linuxserver.io
+                password: ${{ secrets.PASSWORD }}
+                key: ${{ secrets.pvtkey}}   
+                script: 
                 
