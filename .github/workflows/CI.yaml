@@ -46,13 +46,16 @@ jobs:
                 npm install --save-dev jest supertest mongodb-memory-server nodemon
 
             - name: Starting the backend
+              working-directory: ./backend
               run: node app.js
             
             - name: running tests
+              working-directory: ./backend
               run: |
                   npm test
 
             - name: Run test coverage
+              working-directory: ./backend
               run: npm run test:coverage
 
             - name: Upload coverage to Codecov
