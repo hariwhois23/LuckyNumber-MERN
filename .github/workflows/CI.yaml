@@ -2,7 +2,7 @@ name : MERN Continous Integration
 
 on: 
     push: 
-        branches: [Mod]
+        branches: [main]
 
 jobs: 
     backend-test : 
