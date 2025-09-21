@@ -18,10 +18,8 @@ jobs:
                  
                 script: |
                     git clone https://github.com/hariwhois23/LuckyNumber-MERN.git
-                    
-                    cd LuckyNumber-MERN
-                    git checkout Mod
-                    git pull origin Mod
+                    cd LuckyNumber-MERN 
+                    git pull origin main
                     docker-compose down
                     docker-compose up -d --build
 
