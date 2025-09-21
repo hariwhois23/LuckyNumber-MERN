@@ -17,6 +17,7 @@ jobs:
                 key: ${{ secrets.id_rsa }}   
                 script: |
                     git clone https://github.com/hariwhois23/LuckyNumber-MERN.git
+                    git checkout Mod
                     cd LuckyNumber-MERN
                     git pull origin main
                     docker-compose down
