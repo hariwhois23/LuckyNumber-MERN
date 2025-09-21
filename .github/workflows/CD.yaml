@@ -2,7 +2,7 @@ name : CD Pipeline
 
 on:
     push:
-        branches: ["Mod"]
+        branches: ["main"]
 
 jobs:
     deployment:
@@ -17,7 +17,7 @@ jobs:
                 key: ${{ secrets.id_rsa }}  
                  
                 script: |
-                    git clone https://github.com/hariwhois23/LuckyNumber-MERN.git
+                    git clone https://github.com/hariwhois23/LuckyNumber-MERN.git/
                     cd LuckyNumber-MERN 
                     git pull origin main
                     docker-compose down

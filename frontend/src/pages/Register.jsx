@@ -35,7 +35,7 @@ const Login = () => {
           password
         };
         try{
-        const response = await axios.post("http://65.1.109.252:3000/api/v1/register", formData);
+        const response = await axios.post("http://15.207.106.246:3000/api/v1/register", formData);
          toast.success("Registration successfull");
          navigate("/login");
        }catch(err){
