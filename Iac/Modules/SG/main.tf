@@ -1,6 +1,6 @@
 resource "aws_security_group" "sg" {
   name        = "sg"
-  description = "Allow HTTP, SSH inbound traffic"
+  description = "Allow Front-end,Back-end, SSH inbound traffic"
   vpc_id      = var.vpc_id
 
   ingress {
@@ -17,6 +17,14 @@ resource "aws_security_group" "sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  ingress {
+    description = "back-end-end"
+    from_port   = 3000
+    to_port     = 3000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   ingress {
     description = "SSH"
     from_port   = 22

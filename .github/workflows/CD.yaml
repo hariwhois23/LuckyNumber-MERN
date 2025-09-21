@@ -9,12 +9,18 @@ jobs:
         runs-on: ubuntu-latest
 
         steps: 
-            - name: Deploy the application via SSH
+            - name: Deploy the backend via SSH
               uses: appleboy/ssh-action@v1
               with:
                 host: ${{ secrets.HOST }}
-                username: linuxserver.io
-                password: ${{ secrets.PASSWORD }}
-                key: ${{ secrets.pvtkey}}   
-                script: 
+                username: ${{ secrets.EC2_User }}
+                key: ${{ secrets.id_rsa }}   
+                script: |
+                    git clone https://github.com/hariwhois23/LuckyNumber-MERN.git
+                    cd LuckyNumber-MERN
+                    git pull origin main
+                    docker-compose down
+                    docker-compose up -d --build
+
+
                 

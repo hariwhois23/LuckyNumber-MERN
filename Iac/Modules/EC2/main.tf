@@ -17,6 +17,7 @@ resource "aws_instance" "web" {
   #bash script installs docker, git and docker-compose
   user_data = <<EOF
 #!/bin/bash
+sudo -i
 
 # Update packages
 apt-get update -y
